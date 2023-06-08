@@ -20,6 +20,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             myResponse.value = response
         }
     }
+
     fun getPost2(number: Int) {
         viewModelScope.launch {
             val response = repository.getPost2(number)
@@ -30,6 +31,19 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     fun getCustomPost(userId: Int) {
         viewModelScope.launch {
             val response = repository.getCustomPost(userId)
+            myResponseCustom.value = response
+        }
+    }
+
+    fun getCustomPostQ(userId: Int, sort: String, order: String) {
+        viewModelScope.launch {
+            val response = repository.getCustomPostQ(userId, sort, order)
+            myResponseCustom.value = response
+        }
+    }
+    fun getCustomPostQ2(userId: Int, options: Map<String,String>) {
+        viewModelScope.launch {
+            val response = repository.getCustomPostQ2(userId, options)
             myResponseCustom.value = response
         }
     }
