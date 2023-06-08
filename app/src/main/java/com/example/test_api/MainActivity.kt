@@ -24,11 +24,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             val myNumber = binding.editTextNumber.text.toString()
-            viewModel.getPost2(Integer.parseInt(myNumber))
-            viewModel.myResponse.observe(this, Observer { response ->
+            viewModel.getCustomPost(Integer.parseInt(myNumber))
+            viewModel.myResponseCustom.observe(this, Observer { response ->
                 if (response.isSuccessful) {
                     binding.textTitle.text = response.body().toString() // return all content
 //                    binding.textTitle.text = response.body()?.title // return title only
+                    response.body()?.forEach {
+                        Log.i("Response", it.userId.toString())
+                        Log.i("Response", it.id.toString())
+                        Log.i("Response", it.title)
+                        Log.i("Response", it.body)
+                        Log.i("Response", "-------------------------")
+
+                    }
+
                 } else {
                     Log.i("Response", response.errorBody().toString())
                     binding.textTitle.text = response.code().toString()
