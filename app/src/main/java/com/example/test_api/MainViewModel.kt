@@ -18,4 +18,12 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             myResponse.value = response
         }
     }
+    fun getPost2(number: Int) {
+        viewModelScope.launch {
+            val response = repository.getPost2(number)
+            myResponse.value = response
+        }
+    }
+
+
 }

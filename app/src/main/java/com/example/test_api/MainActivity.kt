@@ -21,19 +21,20 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getPost()
-        viewModel.myResponse.observe(this, Observer { response ->
-            if (response.isSuccessful) {
-                Log.i("Response", response.body()?.userId.toString())
-                Log.i("Response", response.body()?.id.toString())
-                Log.i("Response", response.body()?.title!!)
-                binding.textTitle.text = response.body()?.title!!
-                Log.i("Response", response.body()?.body!!)
-            } else {
-                Log.i("Response", response.errorBody().toString())
-                binding.textTitle.text = response.code().toString()
 
-            }
-        })
+        binding.button.setOnClickListener {
+            val myNumber = binding.editTextNumber.text.toString()
+            viewModel.getPost2(Integer.parseInt(myNumber))
+            viewModel.myResponse.observe(this, Observer { response ->
+                if (response.isSuccessful) {
+                    binding.textTitle.text = response.body().toString() // return all content
+//                    binding.textTitle.text = response.body()?.title // return title only
+                } else {
+                    Log.i("Response", response.errorBody().toString())
+                    binding.textTitle.text = response.code().toString()
+
+                }
+            })
+        }
     }
 }
