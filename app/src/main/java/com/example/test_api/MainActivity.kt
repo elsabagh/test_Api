@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
 //        val myPost = Post(2, 2, "ahmed elsabagh", "i am android developer")
-        viewModel.pushPost2(3, 3, "ahmed elsabagh", "i am android developer")
+        viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 Log.i("Response", response.body().toString())
                 binding.textTitle.text = response.body().toString()
                 Log.i("Response", response.code().toString())
-                Log.i("Response", response.message())
+                    Log.i("Response", response.headers().toString())
 
 
             } else {
