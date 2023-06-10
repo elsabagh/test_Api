@@ -3,6 +3,8 @@ package com.example.test_api.api
 import com.example.test_api.model.Post
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -40,5 +42,14 @@ interface SimpleApi {
     @POST("posts")
     suspend fun pushPost(
         @Body post : Post
+    ) : Response<Post>
+
+    @FormUrlEncoded
+    @POST("posts")
+    suspend fun pushPost2(
+        @Field("userId") userId: Int,
+        @Field("id") id: Int,
+        @Field("title") title: String,
+        @Field("body") body: String,
     ) : Response<Post>
 }

@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        val myPost = Post(2, 2, "ahmed elsabagh", "i ama android developer")
-        viewModel.pushPost(myPost)
+//        val myPost = Post(2, 2, "ahmed elsabagh", "i am android developer")
+        viewModel.pushPost2(3, 3, "ahmed elsabagh", "i am android developer")
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 Log.i("Response", response.body().toString())
