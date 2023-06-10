@@ -7,12 +7,22 @@ import com.example.test_api.model.Post
 import com.example.test_api.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import retrofit2.http.POST
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
 
     val myResponse: MutableLiveData<Response<Post>> = MutableLiveData()
     val myResponseCustom: MutableLiveData<Response<List<Post>>> = MutableLiveData()
 
+
+    fun pushPost(post: Post) {
+        viewModelScope.launch {
+            val response = repository.pushPost(post)
+            myResponse.value = response
+
+
+        }
+    }
 
     fun getPost() {
         viewModelScope.launch {
@@ -41,7 +51,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             myResponseCustom.value = response
         }
     }
-    fun getCustomPostQ2(userId: Int, options: Map<String,String>) {
+
+    fun getCustomPostQ2(userId: Int, options: Map<String, String>) {
         viewModelScope.launch {
             val response = repository.getCustomPostQ2(userId, options)
             myResponseCustom.value = response
